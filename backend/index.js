@@ -10,10 +10,6 @@ app.use(cors())
 
 const PORT = process.env.PORT || 8080;
 
-app.get("/ping", (req, res) => {
-    res.send("Hello World")
-})
-
 app.use("/auth", AuthRouter);
 
 app.listen(PORT, () => {
