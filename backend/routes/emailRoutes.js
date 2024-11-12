@@ -1,9 +1,8 @@
-// routes/emailRoutes.js
 const express = require('express');
-const { scheduleEmail } = require('../controllers/emailController');
+const { authenticate } = require('../Middlewares/authMiddleware');
+const { scheduleEmail } = require('../Controllers/emailController');
 const router = express.Router();
 
-// POST route to schedule an email
-router.post('/schedule-email', scheduleEmail);
+router.post('/schedule-email', authenticate, scheduleEmail);
 
 module.exports = router;
