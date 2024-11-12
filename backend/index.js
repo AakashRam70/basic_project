@@ -1,16 +1,11 @@
-const express = require("express");
-const app = express();
-const cors = require("cors");
-const AuthRouter = require('./Routes/AuthRouter')
-
+const express = require('express');
+const bodyParser = require('body-parser');
+const emailRoutes = require('./routes/emailRoutes');
 require('dotenv').config();
-const PORT = process.env.PORT || 8080;
-require('./Models/db')
 
-app.use(express.json());
-app.use(cors());
-app.use("/auth", AuthRouter);
+const app = express();
+app.use(bodyParser.json());
+app.use('/api', emailRoutes);
 
-app.listen(PORT, () => {
-    console.log(`http://localhost/${3001}`)
-})
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
