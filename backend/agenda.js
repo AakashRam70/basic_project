@@ -1,12 +1,9 @@
-// agenda.js
 const Agenda = require('agenda');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-// Initialize Agenda with MongoDB connection
 const agenda = new Agenda({ db: { address: process.env.MONGO_URI } });
 
-// Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -15,7 +12,6 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// Define the Agenda job for sending emails
 agenda.define('send email', async (job) => {
     const { to, subject, text } = job.attrs.data;
     try {
@@ -31,7 +27,6 @@ agenda.define('send email', async (job) => {
     }
 });
 
-// Start the Agenda scheduler
 (async () => {
     await agenda.start();
 })();
